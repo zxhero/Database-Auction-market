@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/materialize.css"/>
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+		<style type="text/css">
+			html{width: 100%;height:100%;}
+			body{
+				width: 100%;height:100%;padding-top: 100px;
+				background-image: url(img/index/REGKTe.jpg);background-size: cover;
+				background-repeat: no-repeat;
+			}
+			#zhuce{
+				width: 60%;padding: 30px;
+				background-color: rgba(0,0,0,.5);
+			}
+			.btn-flat{
+				margin-top: 20px;
+				color: #fff;
+			}
+			input{color: #fff;padding-left:4em ;}
+			.btn-flat:hover{
+				background-color: #333;
+			}
+			.input-field.col label{text-align: left;}
+		</style>
+	</head>
+	<body>
+		<div id="zhuce" class="container center">
+			<div class="container">
+				<h4 style="font-family: '微软雅黑';color: #eee;">注册 </h4>
+				<div class="row">
+					<form class="input-field col s12">
+						<input type="email"  id="email"  class="validate"/>
+						<label for="email" data-error="请输入正确的邮箱格式" data-success="输入成功">邮箱账号:</label>
+					</form>
+				</div>
+				<div class="row">
+					<form class="input-field col s12">
+						<input type="password" name="" id="password1" class="validate"/>
+						<label for="password1">输入密码:</label>
+					</form>
+				</div>
+				<div class="row">
+					<form class="input-field col s12">
+						<input type="password"  name="" id="password2" value=""class="validate" />
+						<label for="password2">确认密码:</label>
+					</form>	
+				</div>
+			</div>
+			<div class="divider"></div>
+			<div class="right container">
+				<a href="javascrpt:;" class="modal-action waves-effect waves-green btn-flat">注册</a>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/materialize.js"></script>
+		<script type="text/javascript">
+			
+			$('.container a').on('click',function(){
+				if($('#email').hasClass('valid')){
+					if($('#password1').val()==$('#password2').val()){
+						window.location.href="index.html";
+					}else{
+						confirm('输入的密码不一致，请重新输入。')
+					}
+				}
+				confirm('请重新输入正确的邮箱格式以及正确的密码。')
+			})
+		</script>
+	</body>
+</html>

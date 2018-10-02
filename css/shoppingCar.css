@@ -1,0 +1,51 @@
+.carShowHistory {
+  height: 360px;
+  position: relative;
+  overflow: hidden; }
+  .carShowHistory h5 {
+    width: 100%;
+    line-height: 60px;
+    font-size: 14px;
+    border-bottom: 3px solid #ccc;
+    margin: 0; }
+    .carShowHistory h5 a {
+      display: inline-block;
+      padding: 0 50px; }
+  .carShowHistory .carShowGoodBox {
+    width: 1200px;
+    height: 290px;
+    position: relative; }
+    .carShowHistory .carShowGoodBox .carShowGood {
+      width: 10000px;
+      height: 290px;
+      position: absolute; }
+      .carShowHistory .carShowGoodBox .carShowGood li {
+        margin: 0 6px;
+        float: left;
+        text-align: center; }
+        .carShowHistory .carShowGoodBox .carShowGood li p {
+          text-align: left;
+          padding: 0 10px; }
+        .carShowHistory .carShowGoodBox .carShowGood li .addCar {
+          display: block;
+          width: 80px;
+          line-height: 26px;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          cursor: pointer;
+          text-align: center; }
+  .carShowHistory .leftBtn,
+  .carShowHistory .rightBtn {
+    position: absolute;
+    display: block;
+    width: 90px;
+    height: 228px;
+    top: 71px;
+    right: 0;
+    font-size: 150px;
+    line-height: 228px;
+    opacity: 0.5;
+    cursor: pointer;
+    z-index: 3; }
+  .carShowHistory .leftBtn {
+    left: 0; }

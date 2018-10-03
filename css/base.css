@@ -1,0 +1,172 @@
+@charset "UTF-8";
+/*(1)清除默认样式*/
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img, input {
+  margin: 0;
+  padding: 0; }
+
+fieldset, img, input, button {
+  border: 0 none;
+  padding: 0;
+  margin: 0;
+  outline-style: none; }
+
+/*去掉input等聚焦时的蓝色边框*/
+ul, li, ol {
+  list-style: none; }
+
+select, input {
+  vertical-align: middle; }
+
+textarea {
+  resize: none; }
+
+/*防止拖动*/
+img {
+  border: 0;
+  vertical-align: middle; }
+
+/*  去掉图片低测默认的3像素空白缝隙，或者用display：block也可以*/
+table {
+  border-collapse: collapse; }
+
+a {
+  text-decoration: none; }
+
+/*公共类*/
+.Mycontainer {
+  width: 984px;
+  margin: 0 auto; }
+
+.fjy-homepge {
+  background: #fff;
+  position: relative; }
+  .fjy-homepge .toTop {
+    display: none;
+    width: 70px;
+    height: 100px;
+    background: url("../img/Veo_mbshop_spirit_pic.png") no-repeat 0 -1050px;
+    position: fixed;
+    bottom: 90px;
+    right: 10px;
+    z-index: 99; }
+  .fjy-homepge .cusService {
+    display: block;
+    width: 70px;
+    height: 50px;
+    background: url("../img/Veo_mbshop_spirit_pic.png") no-repeat 0 -1000px;
+    position: fixed;
+    bottom: 30px;
+    right: 10px;
+    z-index: 99; }
+
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
+
+.ac {
+  text-align: center; }
+
+.hide {
+  display: none; }
+
+.f12 {
+  font-size: 12px; }
+
+.f14 {
+  font-size: 14px; }
+
+.f16 {
+  font-size: 16px; }
+
+/*头部*/
+#headerTop {
+  background: #fff;
+  height: 30px; }
+  #headerTop span {
+    font-size: 12px;
+    color: #999999; }
+  #headerTop .headerTopRight button {
+    border: none;
+    outline: none; }
+  #headerTop .headerTopRight .btnMyBangIfo, #headerTop .headerTopRight .myLoginIfo {
+    margin: 0;
+    width: 20px; }
+
+/* 导航 */
+.nav .navTop {
+  border-top: 1px solid #666; }
+  .nav .navTop .mySearch {
+    width: 380px;
+    margin-top: 27px; }
+    .nav .navTop .mySearch input {
+      width: 350px;
+      border: 1px solid red; }
+    .nav .navTop .mySearch span {
+      cursor: pointer; }
+  .nav .navTop .classify a {
+    color: #666;
+    padding: 0 10px;
+    border-right: 1px solid #ccc; }
+    .nav .navTop .classify a:nth-child(2), .nav .navTop .classify a:last-child {
+      color: red;
+      border: none; }
+  .nav .navTop .shoppingPag {
+    cursor: pointer;
+    margin-top: 30px;
+    font-size: 12px; }
+    .nav .navTop .shoppingPag .shoppingPagNum {
+      color: red; }
+    .nav .navTop .shoppingPag i {
+      font-size: 18px;
+      margin-right: 10px; }
+
+.nav .navBottom {
+  margin-top: 10px;
+  height: 50px;
+  background: #fff; }
+  .nav .navBottom .navBottomLeft {
+    position: relative;
+    width: 600px;
+    font-size: 14px;
+    line-height: 30px;
+    padding-top: 20px; }
+    .nav .navBottom .navBottomLeft a {
+      margin-left: 30px;
+      color: #000; }
+
+/* 尾部 */
+#footerTop {
+  border-bottom: 1px solid #dcdcdc;
+  box-shadow: 0 40px 0 #f7f7f7; }
+  #footerTop .footer {
+    padding-top: 53px;
+    padding-bottom: 40px; }
+    #footerTop .footer table {
+      border: 2px solid #dcdcdc; }
+      #footerTop .footer table tr td {
+        border-right: 2px solid #dcdcdc; }
+        #footerTop .footer table tr td:last-child {
+          border: none 0; }
+        #footerTop .footer table tr td ul li {
+          height: 92px;
+          float: left; }
+          #footerTop .footer table tr td ul li span {
+            display: block;
+            text-align: center; }
+          #footerTop .footer table tr td ul li img {
+            margin: 14px 39px 8px 39px; }
+
+#footerBottom .footerList {
+  border-bottom: 3px solid #999999; }
+  #footerBottom .footerList dl {
+    float: left;
+    margin: 15px 0 15px 130px;
+    text-align: center; }
+    #footerBottom .footerList dl:first-child {
+      margin-left: 10px; }
+    #footerBottom .footerList dl dt {
+      height: 40px;
+      font-size: 12px;
+      font-weight: 999; }

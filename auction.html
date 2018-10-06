@@ -35,6 +35,63 @@
 					<a href="" class="iconfont icon-iconsousuo hide-on-large-only"></a>
 				</li>
 				<li><a href="carList.html" class="iconfont icon-gouwuchexian"></a></li>
+				<li><a href="#upload">Upload</a></li>
+				<li id="upload" class="modal">
+					<!--modal-->
+					
+					<div class="modal-content">
+						<h3>production information:</h3>
+						<div class="divider"></div>
+						<form class="row input-field">
+							<input type="text" name="" id="production_name" value=""/>
+							<label for="production_name" data-lengh="120">production_name:</label>
+						</form>
+						<form class="row input-field">
+							<input type="text" name="" id="price" value=""/>
+							<label for="price" data-lengh="120">price:</label>
+						</form>
+						<form class="row input-field">
+							<input type="text" name="" id="start_time" value=""/>
+							<label for="start_time" data-lengh="120">start time:</label>
+						</form>
+						<form class="row input-field">
+							<input type="text" name="" id="end_time" value=""/>
+							<label for="end_time" data-lengh="120">end time:</label>
+						</form>
+						<form class="row input-field">
+							<input type="text" name="" id="product_status" value="0.5"/>
+							<label for="product_status" data-lengh="120">product status:</label>
+						</form>
+						<form class="row input-field">
+							<input type="text" name="" id="original_price" value=""/>
+							<label for="original_price" data-lengh="120">original price:</label>
+						</form>
+						<form class="row input-field">
+							<input type="text" name="" id="description" value=""/>
+							<label for="description" data-lengh="120">description:</label>
+						</form>
+						<form class="row input-field">
+							<input type="text" name="" id="Pick_up_location" value=""/>
+							<label for="Pick_up_location" data-lengh="120">Pick up location:</label>
+						</form>
+						<form class="row input-field">
+							<input type="text" name="" id="Pick_up_time" value=""/>
+							<label for="Pick up time" data-lengh="120">Pick up time:</label>
+						</form>
+						<form class="row input-field">
+							<input type="text" name="" id="Return_location" value=""/>
+							<label for="Return_location" data-lengh="120">Return location:</label>
+						</form>
+						<form class="row input-field">
+							<input type="text" name="" id="Return_Time" value=""/>
+							<label for="Return_Time" data-lengh="120">Return Time:</label>
+						</form>
+					</div>
+					<div class="divider"></div>
+					<div class="modal-footer">
+						<a href="" class="modal-action modal-close waves-effect waves-green btn-flat">Upload</a><br />
+					</div>
+				</li>
 			</ul>
 			<div class="clearfix"></div>
 		</div>
@@ -126,163 +183,6 @@
 		<!--content-->
 		<div class="content">
 			<div class="row">
-				<!--div class="content1">
-					<div class="col l8 m8 s12">
-						<a href="product_auction.html"><img src="img/store/hero-central.jpg"/></a>
-					</div>
-					<div class="col l4 m4 s12">
-						<ul>
-							<li><a href=""><img src="img/store/hero-u-right.jpg"/></a></li>
-							<p>11.11盛惠提前抢，家庭和学生版2016仅售¥629</p>
-							<li><a href="product1.html"><img src="img/store/hero-d-right.jpg"/></a></li>
-						</ul>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="content2">
-					<div class="right content2-2 col l9 m12 s12">
-						<ul>
-							<li class="col l4 m4 s6">
-								<div class="card">
-						            <div class="card-image">
-						              <img src="img/store/7.jpg">
-						            </div>
-						            <div class="card-content">
-						            	<p>11.11盛惠提前抢，家庭和学生版2016仅售¥629</p>
-						            </div>
-						        </div>
-							</li>
-							<li class="col l4 m4 s6">
-								<div class="card">
-						            <div class="card-image">
-						              <img src="img/store/Spot-office-1-2.jpg">
-						            </div>
-						            <div class="card-content">
-						            	<p>动感家庭套装，限时赠《真•三国无双 7：帝国》</p>
-						            </div>
-						        </div>
-							</li>
-							<li class="col l4 m4 s6">
-								<div class="card">
-						            <div class="card-image">
-						              <img src="img/store/Spot-office-1-3.jpg">
-						            </div>
-						            <div class="card-content">
-						            	<p>全场笔记本优惠¥200，优惠代码MODERNPC</p>
-						            </div>
-						        </div>
-							</li>
-							<li class="col l4 m4 s6">
-								<div class="card">
-						            <div class="card-image">
-						              <img src="img/store/Spot-office-2-1.jpg">
-						            </div>
-						            <div class="card-content">
-						            	<p>微软以旧换新，换购Surface享最高¥700额外优惠</p>
-						            </div>
-						        </div>
-							</li>
-							<li class="col l4 m4 s6">
-								<div class="card">
-						            <div class="card-image">
-						              <img src="img/store/Education-379X199.jpg">
-						            </div>
-						            <div class="card-content">
-						            	<p>教育优惠：多品类优惠中，购Surface享额外好礼</p>
-						            </div>
-						        </div>
-							</li>
-							<li class="col l4 m4 s6">
-								<div class="card">
-						            <div class="card-image">
-						              <img src="img/store/smb-379X199.jpg">
-						            </div>
-						            <div class="card-content">
-						            	<p>为企业采购Surface Pro 4，详询企业购买与服务热线400-805-6783</p>
-						            </div>
-						        </div>
-							</li>
-						</ul>
-					</div>
-					<div class="right content2-1 col l3 m12 s12">
-						<h4>大家都在看</h4>
-						<ul>
-							<li class="col l12 m12 s12">
-							    <div class="card horizontal">
-								    <div class="card-image">
-								        <img src="img/store/Office2016HSMac-130Wx130H-1.png">
-								    </div>
-								    <div class="card-stacked">
-								        <div class="card-content">
-									        <p>Office 家庭和学生版 2016 for Mac</p>
-									        <div class="price">
-									        	<span class="left"><a>&yen; 629</a></span>
-									        	<span class="right"><a href="">购买</a></span>
-									        </div>
-								        </div>
-								    </div>
-							    </div>
-							</li>
-							<li class="col l12 m12 s12">
-							    <div class="card horizontal">
-								    <div class="card-image">
-								        <img src="img/store/MIC1631-130Wx130H-1.png">
-								    </div>
-								    <div class="card-stacked">
-								        <div class="card-content">
-									        <p>Xbox Elite (精英版)无线控制器</p>
-									        <div class="price">
-									        	<span class="left"><a>&yen; 1,099</a></span>
-									        	<span class="right"><a href="">购买</a></span>
-									        </div>
-								        </div>
-								    </div>
-							    </div>
-							</li>
-							<li class="col l12 m12 s12">
-							    <div class="card horizontal">
-								    <div class="card-image">
-								        <img src="img/store/Windows-8-Sculpt-Ergonomic-Mouse-0436-00000-MIC0436-130x130.png">
-								    </div>
-								    <div class="card-stacked">
-								        <div class="card-content">
-									        <p>微软Sculpt 人体工学鼠标</p>
-									        <div class="price">
-									        	<span class="left"><a>&yen; 229</a></span>
-									        	<span class="right"><a href="">购买</a></span>
-									        </div>
-								        </div>
-								    </div>
-							    </div>
-							</li>
-						</ul>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="content3">
-					<div class="col l3 hide-on-med-and-down" style="height: 198px;background-image: url(img/store/Store-Choice.png);background-size: cover;">
-						<h4>店长推荐</h4>
-					</div>
-					<div class=" col l9 m12 s12">
-						<ul class="tabs">
-					        <li class="tab col s2"><a href="#test1">开发者专区</a></li>
-					        <li class="tab col s2"><a href="#test2">Test 2</a></li>
-					    </ul>
-			        	<div id="test1"  class="col s12">
-			        		<div class="tab-txt right">
-			        			<h5>开发者软件</h5>
-			        			<a class="btn" href="">查看详情</a>
-			        		</div>
-			        	</div>
-			        	<div id="test2"  class="col s12">
-				        	<div class="tab-txt right">
-			        			<h5>test2</h5>
-			        			<a class="btn" href="">查看详情</a>
-			        		</div>
-			        	</div>
-					</div>
-					<div class="clearfix"></div>
-				</div-->
 				<div class="content4">
 					<ul>
 						<li class="col l3 m6 s6">
@@ -559,6 +459,29 @@
 			$('#help').modal('');
 			$('#textarea1').val('');
   			$('#textarea1').trigger('autoresize');
+			$('#upload').modal('');
+			$('#production_name').val('');
+  			$('#production_name').trigger('autoresize');
+			$('#price').val('');
+  			$('#price').trigger('autoresize');
+			$('#start_time').val('');
+			$('#start_time').trigger('autoresize');
+			$('#end_time').val('');
+			$('#end_time').trigger('autoresize');
+			$('#product_status').val('');
+			$('#product_status').trigger('autoresize');
+			$('#original_price').val('');
+			$('#original_price').trigger('autoresize');
+			$('#description').val('');
+			$('#description').trigger('autoresize');
+			$('#Pick_up_location').val('');
+			$('#Pick_up_location').trigger('autoresize');
+			$('#Pick_up_time').val('');
+			$('#Pick_up_time').trigger('autoresize');
+			$('#Return_location').val('');
+			$('#Return_location').trigger('autoresize');
+			$('#Return_Time').val('');
+			$('#Return_Time').trigger('autoresize');
 			$(document).on('scroll',function(){
 				if ($(document).scrollTop() >= 70) {
 					$("#nav2").addClass('active')
@@ -568,9 +491,6 @@
 					$(".content").css('padding-top','0px')
 				}
 			})
-			$(document).ready(function(){
-			    $('.content3 ul.tabs').tabs('select_tab', 'tab_id');
-			});
 			//card   height
 			var _cardH1 = $(".content4 ul li:first-child").find('.card').height()
 			$(".content4 ul li:last-child").find('.card').css('height',_cardH1);

@@ -40,6 +40,12 @@
 				</div>
 				<div class="row">
 					<form class="input-field col s12">
+						<input type="text"  name="" id="username" value=""class="validate" />
+						<label for="username">User name:</label>
+					</form>	
+				</div>
+				<div class="row">
+					<form class="input-field col s12">
 						<input type="text"  name="" id="nickname" value=""class="validate" />
 						<label for="nickname">Nickname:</label>
 					</form>	
@@ -100,6 +106,27 @@
 					}
 				}
 				confirm('请重新输入正确的邮箱格式以及正确的密码。')
+				var xhttp = new XMLHttpRequest();
+				var transfer_data = {
+					email: document.getElementById("email").value,
+					nickname: document.getElementById("nickname").value,
+					Address: document.getElementById("Address").value,
+					Phone: document.getElementById("Phone").value,
+					Birthday: document.getElementById("Birthday").value,
+					Bio: document.getElementById("Bio").value,
+					password: document.getElementById("password").value
+				}
+				var transfer_json = "sign_up=" + JSON.stringify(transfer_data);
+				//document.getElementById("mycount").innerHTML = transfer_json;
+				xhttp.open("POST", "sign_up.php", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send(transfer_json);
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						window.location.href = "index.html?id=mycount";
+						document.getElementById("test").innerHTML = this.responseText;
+					}
+				};
 			})
 		</script>
 	</body>

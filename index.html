@@ -39,7 +39,7 @@
 						<a href="" class="iconfont icon-iconsousuo hide-on-large-only"></a>
 					</li>
 					<li><a href="carList.html" class="iconfont icon-gouwuchexian"></a></li>
-					<li><a class="" href="#modal1" >Log In</a></li>
+					<li><a id="mycount" class="" href="#modal1" onload="onload_function">Log In</a></li>
 					<li id="modal1" class="modal">
 						<div class="modal-content">
 							<h4>Log In </h4>
@@ -51,7 +51,7 @@
 							</div>
 							<div class="row">
 								<form class="input-field col s12">
-									<input type="password" name="" id="" value="" />
+									<input type="password" name="" id="password" value="" />
 									<label for="password">Password:</label>
 								</form>
 							</div>
@@ -59,7 +59,7 @@
 						<div class="divider"></div>
 						<div class="modal-footer">
 							<a href="signup.html" class=" modal-action modal-close waves-effect waves-green btn-flat">Sign Up</a>
-							<a href="signin.php" class=" modal-action waves-effect waves-green btn-flat">Sign In</a>
+							<button id="signin" class=" modal-action waves-effect waves-green btn-flat">Sign In</button>
 						</div>
 					</li>
 				</ul>
@@ -231,6 +231,31 @@
 			$(function () {
 				$('#go_top').toTop();
 			})
+			
+			$("#signin").click(function(){
+					//my_price
+				var xhttp = new XMLHttpRequest();
+				var transfer_data = {
+					email: document.getElementById("email").value,
+					password: document.getElementById("password").value
+				}
+				var transfer_json = "sign_in=" + JSON.stringify(transfer_data);
+				//document.getElementById("mycount").innerHTML = transfer_json;
+				xhttp.open("POST", "sign_in.php", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send(transfer_json);
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById("test").innerHTML = this.responseText;
+					}
+				};
+					//window.location.href = "index.html?id=mycount";
+					//document.getElementById("mycount").innerHTML="mycount";
+			});
+			
+			function onload_function(){
+				document.getElementById("mycount").innerHTML="mycount";
+			}
 		</script>
 	</body>
 </html>

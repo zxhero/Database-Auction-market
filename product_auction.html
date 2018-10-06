@@ -431,27 +431,30 @@
 			$('.pro-a .banner-arrows .right').on('click',function(){
 				$('.carousel').carousel('next');
 			})
-			//plus & minus
-				//加的效果
-				$(".content1 #plus").click(function(){
-					var n=$(this).prev().val();
-					var num=parseInt(n)+1;
-					if(num==0){ return;}
-					$(this).prev().val(num);
-				});
-				//减的效果
-				$(".content1 #minus").click(function(){
-					var n=$(this).next().val();
-					var num=parseInt(n)-1;
-					if(num==0){ return}
-					$(this).next().val(num);
-				});
 				//bid
 				$('#BID').modal('');
 				var bid_price = document.getElementById("Bid_price");
 				$('#Bid_price').trigger('autoresize');
 				$(".content1 #bid_confirm").click(function(){
 					//my_price
+					var xhttp = new XMLHttpRequest();
+					var transfer_data = {
+						bid_price: document.getElementById("my_price").value
+						//owner_id: ,
+						//product_id: ,
+						//bidder_id: ,
+					}
+					var transfer_json = "Bid_price=" + JSON.stringify(transfer_data);
+				//document.getElementById("mycount").innerHTML = transfer_json;
+					xhttp.open("POST", "handle_bid.php", true);
+					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send(transfer_json);
+					xhttp.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							window.location.href = "index.html?id=mycount";
+							document.getElementById("test").innerHTML = this.responseText;
+						}
+					};
 					document.getElementById("my_price").innerHTML="My Price: "+bid_price.value;
 					//alert(bid_price.va);
 				});

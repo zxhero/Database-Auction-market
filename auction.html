@@ -37,14 +37,16 @@
 				<li><a href="carList.html" class="iconfont icon-gouwuchexian"></a></li>
 				<li><a href="#upload">Upload</a></li>
 				<li id="upload" class="modal">
-					<!--modal-->
-					
+					<!--modal-->				
 					<div class="modal-content">
 						<h3>production information:</h3>
 						<div class="divider"></div>
 						<form class="row input-field">
 							<input type="text" name="" id="production_name" value=""/>
 							<label for="production_name" data-lengh="120">production_name:</label>
+						</form>
+						<form class="row input-field">
+							production image<input type="file" name="" id="production_image" value=""/>
 						</form>
 						<form class="row input-field">
 							<input type="text" name="" id="price" value=""/>
@@ -59,7 +61,7 @@
 							<label for="end_time" data-lengh="120">end time:</label>
 						</form>
 						<form class="row input-field">
-							<input type="text" name="" id="product_status" value="0.5"/>
+							<input type="text" name="" id="product_status" value=""/>
 							<label for="product_status" data-lengh="120">product status:</label>
 						</form>
 						<form class="row input-field">
@@ -89,7 +91,7 @@
 					</div>
 					<div class="divider"></div>
 					<div class="modal-footer">
-						<a href="" class="modal-action modal-close waves-effect waves-green btn-flat">Upload</a><br />
+						<button id="upload_confirm" class="modal-action modal-close waves-effect waves-green btn-flat">Upload</button><br />
 					</div>
 				</li>
 			</ul>
@@ -457,30 +459,30 @@
 		<a id="go_top" class="btn-floating">go</a>
 		<script src="js/jquery.min.js"></script><script src="js/materialize.js"></script><script src="js/index.js"></script><script type="text/javascript">
 			$('#help').modal('');
-			$('#textarea1').val('');
+			//$('#textarea1').val('');
   			$('#textarea1').trigger('autoresize');
 			$('#upload').modal('');
-			$('#production_name').val('');
+			//$('#production_name').val('');
   			$('#production_name').trigger('autoresize');
-			$('#price').val('');
+			//$('#price').val('');
   			$('#price').trigger('autoresize');
-			$('#start_time').val('');
+			//$('#start_time').val('');
 			$('#start_time').trigger('autoresize');
-			$('#end_time').val('');
+			//$('#end_time').val('');
 			$('#end_time').trigger('autoresize');
-			$('#product_status').val('');
+			//$('#product_status').val('');
 			$('#product_status').trigger('autoresize');
-			$('#original_price').val('');
+			//$('#original_price').val('');
 			$('#original_price').trigger('autoresize');
-			$('#description').val('');
+			//$('#description').val('');
 			$('#description').trigger('autoresize');
-			$('#Pick_up_location').val('');
+			//$('#Pick_up_location').val('');
 			$('#Pick_up_location').trigger('autoresize');
-			$('#Pick_up_time').val('');
+			//$('#Pick_up_time').val('');
 			$('#Pick_up_time').trigger('autoresize');
-			$('#Return_location').val('');
+			//$('#Return_location').val('');
 			$('#Return_location').trigger('autoresize');
-			$('#Return_Time').val('');
+			//$('#Return_Time').val('');
 			$('#Return_Time').trigger('autoresize');
 			$(document).on('scroll',function(){
 				if ($(document).scrollTop() >= 70) {
@@ -558,6 +560,38 @@
 			})(jQuery);
 			$(function () {
 				$('#go_top').toTop();
+			})
+			
+			$("#upload_confirm").click(function(){
+				var fileObj = document.getElementById("production_image").files[0];
+
+				if(fileObj) alert(fileObj);
+				var form = new FormData();
+				form.append("production_name", document.getElementById("production_name").value);
+				form.append("production_image", fileObj);
+				form.append("price", document.getElementById("price").value);
+				form.append("start_time", document.getElementById("start_time").value);
+				form.append("end_time", document.getElementById("end_time").value);
+				form.append("original_price", document.getElementById("original_price").value);
+				form.append("product_status", document.getElementById("product_status").value);
+				form.append("description", document.getElementById("description").value);
+				form.append("Pick_up_location", document.getElementById("Pick_up_location").value);
+				form.append("Pick_up_time", document.getElementById("Pick_up_time").value);
+				form.append("Return_location", document.getElementById("Return_location").value);
+				form.append("Return_Time", document.getElementById("Return_Time").value);
+				var xhttp = new XMLHttpRequest();
+				//var transfer_json = "Upload_production=" + JSON.stringify(transfer_data);
+					//console.log(transfer_json);
+				//document.getElementById("mycount").innerHTML = transfer_json;
+				xhttp.open("POST", "handle_bid.php", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send(form);
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						//window.location.href = "index.html?id=mycount";
+						//document.getElementById("test").innerHTML = this.responseText;
+					}
+				};
 			})
 		</script>
 	</body>

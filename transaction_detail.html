@@ -44,7 +44,7 @@
 			    <div class="col s12">
 			        <a href="index.html" class="breadcrumb">Home</a>
 			        <a href="auction.html" class="breadcrumb">Auction Market</a>
-			        <a href="product_auction.html" class="breadcrumb">Production Detail</a>
+			        <a href="product_auction.html" class="breadcrumb">Transaction Detail</a>
 			    </div>
 		    </div>
 		    <div class="clearfix"></div>
@@ -135,29 +135,16 @@
 					<div class="product-intro col l6 m12 s12">
 						<div class="product-intro-price">
 							<h5 id="production_name">物品名称</h5>
-							<h5 id= "price">Reserve Price: </h5>
-							<div class="left price1">
-								<p >start time :</p>
-								<p >end time :</p>
-							</div>
-							<div class="left price2">
-								<p id="start_time">¥ 11,088</p>
-								<p id="end_time">¥ 9,988</p>
-							</div>
+							<h5 id= "deal_price">Deal Price: </h5>
 							<div class="clearfix"></div>
 						</div>
 						<div class="divider"></div>
 						<div class="product-intro-txt">
 							<ul>
-								<li id="owner">Owner: </li>
-								<li id="product_status">status: </li>
-								<li id="original_price">original price:</li>
-								
-								<li id="description">simple description</li>
+								<li id="owner">Owner: <span id="owner">Zhang Xu</span></li>
+								<li id="transaction_status">status: </li>								
+								<li id="description">simple description: </li>
 							</ul>
-							<p id="bid_status_people"> There are <span>100</span> people bidding</p>
-							<p > Highest price: <span id=bid_status_price>100</span></p>
-							<p id="remain_time"> Remaining time: <span>微软以旧换新有礼赠: </span></p>
 						</div>
 						<div class="divider"></div>
 						<div class="product-intro-select">
@@ -166,28 +153,26 @@
 								<li class="col l5 m5 s12"><a href="">Pick up time: <span> ¥13,288.00</span></a></li>
 								<li class="col l5 m5 s12"><a href="">Return location: <span> ¥14,288.00</span></a></li>
 								<li class="col l5 m5 s12"><a href="">Return Time <span> ¥18,288.00</span></a></li>
-								<li class="col l5 m5 s12"><a href=""></a></li>
 								<div class="clearfix"></div>
 							</ul>
 						</div>
 						<div class="divider"></div>
 						<div class="product-intro-car">
-							<p id="my_price" class="left btn"> My price: </p>
 							<!--button id="bid_icon" class="right btn">Bid Now!</button>
 							<a href="#bid" class="right btn">Bid Now!</a-->
-							<ul class="right hide-on-med-and-down" id="Bid_start">
-								<li id="BID" class="modal">
+							<ul class="right hide-on-med-and-down" id="Return_start">
+								<li id="RANKING" class="modal">
 								<!--modal-->
 									<div class="modal-content">
-									<h4>Provide your Price!</h4>
+									<h4>Rank this experience</h4>
 									<form class="row input-field">
-									<input type="text" name="" id="Bid_price" value=""/>
-									<label for="Bid_price" data-lengh="120">Your price:</label>
+									<input type="text" name="" id="Rank_star" value=""/>
+									<label for="Rank_star" data-lengh="120">ranking from 1 to 5:</label>
 									</form>
 									</div>
 								<div class="divider"></div>
 								<div class="modal-footer">
-								<button id="bid_confirm" class="modal-action modal-close btn">BID</button>
+								<button id="return_confirm" class="modal-action modal-close btn">Return</button>
 								</div>
 								</li>
 							</ul>
@@ -424,43 +409,7 @@
 			$('.pro-a .banner-arrows .right').on('click',function(){
 				$('.carousel').carousel('next');
 			})
-				//bid
-				$('#BID').modal('');
-				$('#Bid_price').trigger('autoresize');
-				$(".content1 #bid_confirm").click(function(){
-					var bid_price = document.getElementById("Bid_price");
-					//check bid price input
-					var current_price = document.getElementById("bid_status_price").innerHTML;
-					//console.log(current_price);
-					//my_price
-					if(parseInt(bid_price.value) <= parseInt(current_price)){
-						alert("your price should higher than current highest price");
-						return ;
-					}
-					
-					var xhttp = new XMLHttpRequest();
-					var transfer_data = {
-						bid_price: document.getElementById("Bid_price").value
-						//ownerid: ,
-						//product_id: ,
-						//username: ,
-					}
-					
-					var transfer_json = "Bid_price=" + JSON.stringify(transfer_data);
-					//console.log(transfer_json);
-				//document.getElementById("mycount").innerHTML = transfer_json;
-					xhttp.open("POST", "handle_bid.php", true);
-					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-					xhttp.send(transfer_json);
-					xhttp.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							//window.location.href = "index.html?id=mycount";
-							//document.getElementById("test").innerHTML = this.responseText;
-						}
-					};
-					document.getElementById("my_price").innerHTML="My Price: "+bid_price.value;
-					//alert(bid_price.va);
-				});
+
 			//在可视区域内出现时执行动画
 			//
 			//
@@ -541,19 +490,50 @@
 				$('#go_top').toTop();
 			})
 			
-			var owner = document.getElementById("owner");
+			var owner = document.getElementById("owner").innerHTML;
 			var username = getCookie("username");
-			if(username != ""){
+			if(username != "" && username == owner){//owner
 				//document.getElementById("owner").innerHTML = "zxhero";
 				let popContent =
-					'<li><a class="right btn" id="Bid_then">Edit Bid</a></li>'
-				$('#Bid_start').append(popContent);
-			}else{
+					'<li><a href="#RANKING" class="right btn" >Confirm return</a></li>'
+				$('#Return_start').append(popContent);
+			}else{//not owner
 				let popContent =
-					'<li><a href="#BID" class="right btn" >Bid Now!</a></li>' ;
-				$('#Bid_start').append(popContent);
+					'<li><a href="#RANKING" class="right btn" >Return item</a></li>' ;
+				$('#Return_start').append(popContent);
 			}
-			
+							//bid
+			$('#RANKING').modal('');
+			$('#Rank_star').trigger('autoresize');
+			$(".content1 #return_confirm").click(function(){
+				//var Rank_star = document.getElementById("Bid_price");
+				//check bid price input
+				//var current_price = document.getElementById("bid_status_price").innerHTML;
+				//console.log(current_price);
+				//my_price
+				var form = new FormData();
+				form.append("Rank_star", document.getElementById("Rank_star").value);
+				if(username != "" && username == owner){
+					form.append("owner", "1");
+				}else{
+					form.append("owner", "0");
+				}
+				var xhttp = new XMLHttpRequest();
+				
+				//console.log(transfer_json);
+				//document.getElementById("mycount").innerHTML = transfer_json;
+				xhttp.open("POST", "handle_bid.php", true);
+				//xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send(form);
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						//window.location.href = "index.html?id=mycount";
+						//document.getElementById("test").innerHTML = this.responseText;
+					}
+				};
+				//document.getElementById("my_price").innerHTML="My Price: "+bid_price.value;
+				//alert(bid_price.va);
+			});
 			function getCookie(cname)
 			{
 				var name = cname + "=";

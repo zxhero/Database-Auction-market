@@ -45,8 +45,8 @@
 							<h4>Log In </h4>
 							<div class="row">
 								<form class="input-field col s12">
-									<input type="email" class="validate" id="email" />
-									<label for="email" data-error="请输入正确的邮箱格式" data-success="输入成功">Email:</label>
+									<input type="text" class="validate" id="username" />
+									<label for="username">User name:</label>
 								</form>
 							</div>
 							<div class="row">
@@ -186,6 +186,7 @@
 		<script src="js/index.js"></script>
 		<script type="text/javascript">
 			$('#modal1').modal('');
+			$('#username').trigger('autoresize');
 			;(function () {
 				"use strict";
 				$.fn.toTop = function (t) {
@@ -236,7 +237,7 @@
 					//my_price
 				var xhttp = new XMLHttpRequest();
 				var transfer_data = {
-					email: document.getElementById("email").value,
+					username: document.getElementById("username").value,
 					password: document.getElementById("password").value
 				}
 				var transfer_json = "sign_in=" + JSON.stringify(transfer_data);
@@ -247,6 +248,7 @@
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById("test").innerHTML = this.responseText;
+						setCookie(transfer_data.username.toGMTString(),24);
 					}
 				};
 					//window.location.href = "index.html?id=mycount";
@@ -255,6 +257,14 @@
 			
 			function onload_function(){
 				document.getElementById("mycount").innerHTML="mycount";
+			}
+			
+			function setCookie(cvalue,exdays)
+			{
+				var d = new Date();
+				d.setTime(d.getTime()+(exdays*24*60*60*1000));
+				var expires = "expires="+d.toGMTString();
+				document.cookie = "username=" + cvalue + "; " + expires;
 			}
 		</script>
 	</body>

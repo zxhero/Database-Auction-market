@@ -34,7 +34,7 @@
 					<input type="search"  placeholder="Search..." class="hide-on-med-and-down"/>
 					<a href="" class="iconfont icon-iconsousuo hide-on-large-only"></a>
 				</li>
-				<li><a href="carList.html" class="iconfont icon-gouwuchexian"></a></li>
+				<li><a href="profile.html" class="iconfont icon-gouwuchexian"></a></li>
 				<li><a href="#upload">Upload</a></li>
 				<li id="upload" class="modal">
 					<!--modal-->				
@@ -562,11 +562,18 @@
 				$('#go_top').toTop();
 			})
 			
+			var username = getCookie("username");
+			
 			$("#upload_confirm").click(function(){
+				if(username != '' || username == null){
+					alert("you need log in");
+					window.location.href = "index.html";
+				}
 				var fileObj = document.getElementById("production_image").files[0];
 
 				if(fileObj) alert(fileObj);
 				var form = new FormData();
+				form.append("username",username);
 				form.append("production_name", document.getElementById("production_name").value);
 				form.append("production_image", fileObj);
 				form.append("price", document.getElementById("price").value);
@@ -585,14 +592,27 @@
 				//document.getElementById("mycount").innerHTML = transfer_json;
 				xhttp.open("POST", "handle_bid.php", true);
 				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				alert("111");
 				xhttp.send(form);
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
-						//window.location.href = "index.html?id=mycount";
+						window.location.href = "auction.html";
 						//document.getElementById("test").innerHTML = this.responseText;
 					}
 				};
 			})
+			
+			function getCookie(cname)
+			{
+				var name = cname + "=";
+				var ca = document.cookie.split(';');
+				for(var i=0; i<ca.length; i++) 
+				{
+					var c = ca[i].trim();
+					if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+				}
+				return "";
+			}
 		</script>
 	</body>
 </html>

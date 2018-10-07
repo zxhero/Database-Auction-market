@@ -33,13 +33,13 @@
 					<div class="clearfix"></div>
 				</ul>
 				<!--search-->
-				<ul class="right search-wrapper hide-on-small-and-down">
-					<li class="input-field">
+				<ul id="login_start" class="right search-wrapper hide-on-small-and-down">
+					<li class="input-field" >
 						<input type="search" name="" placeholder="Search Market" class="hide-on-med-and-down"/>
 						<a href="" class="iconfont icon-iconsousuo hide-on-large-only"></a>
 					</li>
-					<li><a href="carList.html" class="iconfont icon-gouwuchexian"></a></li>
-					<li><a id="mycount" class="" href="#modal1" onload="onload_function">Log In</a></li>
+					
+					
 					<li id="modal1" class="modal">
 						<div class="modal-content">
 							<h4>Log In </h4>
@@ -233,6 +233,19 @@
 				$('#go_top').toTop();
 			})
 			
+			var username = getCookie("username");
+			if(username == ''){
+			
+				let popContent =
+					'<li ><a href="profile.html" class="iconfont" id="mycount"> welcome mycount</a></li>' ;
+				$('#login_start').append(popContent);
+				//document.getElementById("mycount").innerHTML="";
+			}else{
+				let popContent =
+					'<li><a id="mycount" class="" href="#modal1" onload="onload_function">Log In</a></li>' ;
+				$('#login_start').append(popContent);
+			}
+			
 			$("#signin").click(function(){
 					//my_price
 				var xhttp = new XMLHttpRequest();
@@ -248,6 +261,11 @@
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById("test").innerHTML = this.responseText;
+						if(this.responseText == "fail"){
+							alert("please input correct username and password");
+							//window.location.href = "index.html?id=mycount";
+							return ;
+						}
 						setCookie(transfer_data.username.toGMTString(),24);
 					}
 				};
@@ -265,6 +283,18 @@
 				d.setTime(d.getTime()+(exdays*24*60*60*1000));
 				var expires = "expires="+d.toGMTString();
 				document.cookie = "username=" + cvalue + "; " + expires;
+			}
+			
+			function getCookie(cname)
+			{
+				var name = cname + "=";
+				var ca = document.cookie.split(';');
+				for(var i=0; i<ca.length; i++) 
+				{
+					var c = ca[i].trim();
+					if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+				}
+				return "";
 			}
 		</script>
 	</body>

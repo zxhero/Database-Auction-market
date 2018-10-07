@@ -34,7 +34,7 @@
 				<h4 style="font-family: '微软雅黑';color: #eee;">Sign Up </h4>
 				<div class="row">
 					<form class="input-field col s12">
-						<input type="email"  id="email"  class="validate"/>
+						<input type="email"  id="email"  class="validate" />
 						<label for="email" data-error="请输入正确的邮箱格式" data-success="输入成功">Email:</label>
 					</form>
 				</div>
@@ -106,6 +106,14 @@
 					}
 				}
 				//confirm('请重新输入正确的邮箱格式以及正确的密码。')
+				if(document.getElementById("email").value=='' || document.getElementById("username").value==''
+				   || document.getElementById("nickname").value=='' || document.getElementById("Address").value==''
+				   || document.getElementById("Phone").value=='' || document.getElementById("Birthday").value=='' 
+				   || document.getElementById("Bio").value=='' || document.getElementById("password1").value==''){
+					alert("please fill all information!");
+					//window.location.href = "index.html";
+					return;
+				}
 				var xhttp = new XMLHttpRequest();
 				var transfer_data = {
 					email: document.getElementById("email").value,
@@ -115,7 +123,7 @@
 					Phone: document.getElementById("Phone").value,
 					Birthday: document.getElementById("Birthday").value,
 					Bio: document.getElementById("Bio").value,
-					password: document.getElementById("password").value
+					password: document.getElementById("password1").value
 				}
 				var transfer_json = "sign_up=" + JSON.stringify(transfer_data);
 				//document.getElementById("mycount").innerHTML = transfer_json;

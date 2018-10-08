@@ -93,16 +93,16 @@
 						<div class="divider"></div>
 						<div class="product-intro-select">
 							<ul>
-								<li class="col l5 m5 s12"><a href="">Pick up location:<span> ¥9,288.00</span>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-								<li class="col l5 m5 s12"><a href="">Pick up time: <span> ¥13,288.00</span></a></li>
-								<li class="col l5 m5 s12"><a href="">Return location: <span> ¥14,288.00</span></a></li>
-								<li class="col l5 m5 s12"><a href="">Return Time <span> ¥18,288.00</span></a></li>
+								<li class="col l5 m5 s12"><a >Pick up location:<span> ¥9,288.00</span>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+								<li class="col l5 m5 s12"><a >Pick up time: <span> ¥13,288.00</span></a></li>
+								<li class="col l5 m5 s12"><a >Return location: <span> ¥14,288.00</span></a></li>
+								<li class="col l5 m5 s12"><a >Return Time <span> ¥18,288.00</span></a></li>
 								<div class="clearfix"></div>
 							</ul>
 						</div>
 						<div class="divider"></div>
-						<div class="product-intro-car">
-							<p id="my_price" class="left btn"> My price: </p>
+						<div class="product-intro-car" id="my_price_start">
+							<!--p id="my_price" class="left btn"> My price: </p-->
 							<!--button id="bid_icon" class="right btn">Bid Now!</button>
 							<a href="#bid" class="right btn">Bid Now!</a-->
 							<ul class="right hide-on-med-and-down" id="Bid_start">
@@ -437,10 +437,10 @@
 			var owner = document.getElementById("owner").innerHTML;
 			var username = getCookie("username");
 			
-			if(username == ''){
+			if(username != ''){
 			
 				let popContent =
-					'<a href="profile.html" class="iconfont" id="mycount"> welcome mycount</a>' ;
+					'<a href="profile.html" class="iconfont" id="mycount"> welcome'+ username +'</a>' ;
 				$('#login_start').append(popContent);
 				//document.getElementById("mycount").innerHTML="";
 			}
@@ -448,17 +448,23 @@
 			if(username == ""){
 				
 				let popContent =
-					'<li><a href="index.html" class="right btn" onclick="alert()" >Bid Now!</a></li>' ;
-				$('#Bid_start').append(popContent);
-			}else if(username != "" && username == owner){
+					'<li><a href="index.html" class="right btn" onclick="alert(&quot;Login!&quot;)" >Bid Now!</a></li>' ;
+				$('#Bid_start').prepend(popContent);
+			}else if(username != "" && username == owner){1
 				//document.getElementById("owner").innerHTML = "zxhero";
-				let popContent =
+				let popContent1 =
 					'<li><a class="right btn" id="Bid_then">Edit Bid</a></li>'
-				$('#Bid_start').append(popContent);
+				$('#Bid_start').append(popContent1);
+				let popContent2 = 
+					'<a id="delete_bid" class="left btn" href="javascript:history.go(-1)"> Delete! </a>';
+				$('#my_price_start').prepend(popContent2);
 			}else{
-				let popContent =
+				let popContent1 =
 					'<li><a href="#BID" class="right btn" >Bid Now!</a></li>' ;
-				$('#Bid_start').append(popContent);
+				let popContent2 = 
+					'<p id="my_price" class="left btn"> My price: </p>';
+				$('#Bid_start').prepend(popContent1);
+				$('#my_price_start').prepend(popContent2);
 			}
 			
 			var  stop_bid = setInterval("check_time()",1000);
@@ -497,6 +503,7 @@
 					}
 				};
 				document.getElementById("my_price").innerHTML="My Price: "+bid_price.value;
+				document.getElementById("bid_status_price").innerHTML=bid_price.value;
 					//alert(bid_price.va);
 			});			
 			function getCookie(cname)
@@ -513,14 +520,14 @@
 			
 			function check_time(){
 				var t=new Date();
-				var ts = "2018-10-8 19:17";
+				var ts = document.getElementById("end_time").innerHTML;
 				var year = ts.split(" ")[0].split("-")[0];
 				var month = ts.split(" ")[0].split("-")[1];
 				var day = ts.split(" ")[0].split("-")[2];
 				var hour = ts.split(" ")[1].split(":")[0];
 				var minute = ts.split(" ")[1].split(":")[1];
 				//alert(typeof(t.getFullYear()));
-				var end_time = document.getElementById("my_price").innerHTML;
+				//var end_time = document.getElementById("my_price").innerHTML;
 				if(t.getFullYear().toString() == year && (t.getMonth()+1).toString() == month && t.getDate().toString() == day
 				   && t.getHours().toString() == hour && t.getMinutes().toString() == minute){
 					//alert(t.getFullYear().toString());

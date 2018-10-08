@@ -476,7 +476,7 @@
 					return ;
 				}
 					
-				var xhttp = new XMLHttpRequest();
+				let xhttp = new XMLHttpRequest();
 				var transfer_data = {
 					bid_price: document.getElementById("Bid_price").value,
 					ownerid: owner,
@@ -513,11 +513,41 @@
 			
 			function check_time(){
 				var t=new Date();
-				alert(t);
+				var ts = "2018-10-8 19:17";
+				var year = ts.split(" ")[0].split("-")[0];
+				var month = ts.split(" ")[0].split("-")[1];
+				var day = ts.split(" ")[0].split("-")[2];
+				var hour = ts.split(" ")[1].split(":")[0];
+				var minute = ts.split(" ")[1].split(":")[1];
+				//alert(typeof(t.getFullYear()));
 				var end_time = document.getElementById("my_price").innerHTML;
-				if(0){
+				if(t.getFullYear().toString() == year && (t.getMonth()+1).toString() == month && t.getDate().toString() == day
+				   && t.getHours().toString() == hour && t.getMinutes().toString() == minute){
+					//alert(t.getFullYear().toString());
 					clearInterval(stop_bid);
+					let xhttp = new XMLHttpRequest();
+					var transfer_data = {
+						ownerid: owner,
+						product_id: document.getElementById("production_num").innerHTML.split(":")[1],
+					}
 					
+					var transfer_json = "Bid_end=" + JSON.stringify(transfer_data);
+					xhttp.open("POST", "handle_bid.php", true);
+					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					xhttp.send(transfer_json);
+					xhttp.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							let response = this.responseText.parseJSON(); 
+							if(username == response.username){
+								alert("You win!");
+								window.location.href = "transaction_datail.php?id="+response.transaction_id.toString();
+							}
+							else{
+								alert("this bid end!")
+								window.location.href = "auction.php";
+							}	
+						}
+					};
 				}else return;
 				
 			}

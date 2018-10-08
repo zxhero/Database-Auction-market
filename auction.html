@@ -34,7 +34,7 @@
 					<input type="search"  placeholder="Search..." class="hide-on-med-and-down"/>
 					<a href="" class="iconfont icon-iconsousuo hide-on-large-only"></a>
 				</li>
-				<li><a href="profile.html" class="iconfont icon-gouwuchexian"></a></li>
+				<li id="login_start"></li>
 				<li><a href="#upload">Upload</a></li>
 				<li id="upload" class="modal">
 					<!--modal-->				
@@ -563,6 +563,14 @@
 			})
 			
 			var username = getCookie("username");
+
+			if(username == ''){
+			
+				let popContent =
+					'<a href="profile.html" class="iconfont" id="mycount"> welcome mycount</a>' ;
+				$('#login_start').append(popContent);
+				//document.getElementById("mycount").innerHTML="";
+			}
 			
 			$("#upload_confirm").click(function(){
 				if(username != '' || username == null){

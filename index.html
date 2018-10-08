@@ -234,8 +234,7 @@
 			})
 			
 			var username = getCookie("username");
-			if(username == ''){
-			
+			if(username != ''){
 				let popContent =
 					'<li ><a href="profile.html" class="iconfont" id="mycount"> welcome mycount</a></li>' ;
 				$('#login_start').append(popContent);
@@ -267,6 +266,7 @@
 							return ;
 						}
 						setCookie(transfer_data.username.toGMTString(),24);
+						window.location.href = "index.html";
 					}
 				};
 					//window.location.href = "index.html?id=mycount";

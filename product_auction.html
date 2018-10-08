@@ -34,7 +34,7 @@
 					<input type="search"  placeholder="Search..." class="hide-on-med-and-down"/>
 					<a href="" class="iconfont icon-iconsousuo hide-on-large-only"></a>
 				</li>
-				<li><a href="profile.html" class="iconfont icon-gouwuchexian"></a></li>
+				<li id="login_start"></li>
 			</ul>
 			<div class="clearfix"></div>
 		</div>
@@ -436,6 +436,15 @@
 			
 			var owner = document.getElementById("owner").innerHTML;
 			var username = getCookie("username");
+			
+			if(username == ''){
+			
+				let popContent =
+					'<a href="profile.html" class="iconfont" id="mycount"> welcome mycount</a>' ;
+				$('#login_start').append(popContent);
+				//document.getElementById("mycount").innerHTML="";
+			}
+			
 			if(username == ""){
 				
 				let popContent =
@@ -451,6 +460,8 @@
 					'<li><a href="#BID" class="right btn" >Bid Now!</a></li>' ;
 				$('#Bid_start').append(popContent);
 			}
+			
+			var  stop_bid = setInterval("check_time()",1000);
 			
 			$('#BID').modal('');
 			$('#Bid_price').trigger('autoresize');
@@ -498,6 +509,17 @@
 					if (c.indexOf(name)==0) return c.substring(name.length,c.length);
 				}
 				return "";
+			}
+			
+			function check_time(){
+				var t=new Date();
+				alert(t);
+				var end_time = document.getElementById("my_price").innerHTML;
+				if(0){
+					clearInterval(stop_bid);
+					
+				}else return;
+				
 			}
 		</script>
 	</body>

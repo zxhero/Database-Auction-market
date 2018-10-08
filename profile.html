@@ -39,8 +39,8 @@
 						<input type="search" name="" placeholder="Search Market" class="hide-on-med-and-down"/>
 						<a href="" class="iconfont icon-iconsousuo hide-on-large-only"></a>
 					</li>
-					<!--li><a href="carList.html" class="iconfont icon-gouwuchexian"></a></li>
-					<li><a id="mycount" class="" href="#modal1" onload="onload_function">Log In</a></li>
+					<li><a href="index.html" class="iconfont" color="red" onclick="logout()">Log out</a></li>
+					<!--li><a id="mycount" class="" href="#modal1" onload="onload_function">Log In</a></li>
 					<li id="modal1" class="modal">
 						<div class="modal-content">
 							<h4>Log In </h4>
@@ -280,6 +280,25 @@
 			
 			function onload_function(){
 				document.getElementById("mycount").innerHTML="mycount";
+			}
+			var username = getCookie("username");
+			function logout(){
+				//alert("!!!");
+				var date=new Date();
+				date.setTime(date.getTime()-10000);
+				document.cookie=username+"=v; expire="+date.toGMTString();
+			}
+			
+			function getCookie(cname)
+			{
+				var name = cname + "=";
+				var ca = document.cookie.split(';');
+				for(var i=0; i<ca.length; i++) 
+				{
+					var c = ca[i].trim();
+					if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+				}
+				return "";
 			}
 		</script>
 		

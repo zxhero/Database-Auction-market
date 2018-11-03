@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>SCT-后台系统</title>
+	<title>ADMIN SYSTEM</title>
 	<link href="style/authority/main_css.css" rel="stylesheet" type="text/css" />
 	<link href="style/authority/zTreeStyle.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="scripts/jquery/jquery-1.7.1.js"></script>
@@ -40,70 +40,6 @@
 				}
 		};
 		 
-		var curExpandNode = null;
-		function beforeExpand(treeId, treeNode) {
-			var pNode = curExpandNode ? curExpandNode.getParentNode():null;
-			var treeNodeP = treeNode.parentTId ? treeNode.getParentNode():null;
-			for(var i=0, l=!treeNodeP ? 0:treeNodeP.children.length; i<l; i++ ) {
-				if (treeNode !== treeNodeP.children[i]) {
-					zTree.expandNode(treeNodeP.children[i], false);
-				}
-			}
-			while (pNode) {
-				if (pNode === treeNode) {
-					break;
-				}
-				pNode = pNode.getParentNode();
-			}
-			if (!pNode) {
-				singlePath(treeNode);
-			}
-	
-		}
-		function singlePath(newNode) {
-			if (newNode === curExpandNode) return;
-			if (curExpandNode && curExpandNode.open==true) {
-				if (newNode.parentTId === curExpandNode.parentTId) {
-					zTree.expandNode(curExpandNode, false);
-				} else {
-					var newParents = [];
-					while (newNode) {
-						newNode = newNode.getParentNode();
-						if (newNode === curExpandNode) {
-							newParents = null;
-							break;
-						} else if (newNode) {
-							newParents.push(newNode);
-						}
-					}
-					if (newParents!=null) {
-						var oldNode = curExpandNode;
-						var oldParents = [];
-						while (oldNode) {
-							oldNode = oldNode.getParentNode();
-							if (oldNode) {
-								oldParents.push(oldNode);
-							}
-						}
-						if (newParents.length>0) {
-							for (var i = Math.min(newParents.length, oldParents.length)-1; i>=0; i--) {
-								if (newParents[i] !== oldParents[i]) {
-									zTree.expandNode(oldParents[i], false);
-									break;
-								}
-							}
-						}else {
-							zTree.expandNode(oldParents[oldParents.length-1], false);
-						}
-					}
-				}
-			}
-			curExpandNode = newNode;
-		}
-	
-		function onExpand(event, treeId, treeNode) {
-			curExpandNode = treeNode;
-		}
 		
 		/** 用于捕获节点被点击的事件回调函数  **/
 		function zTreeOnClick(event, treeId, treeNode) {
@@ -145,24 +81,6 @@
 		});
 		
 		function loadMenu(resourceType, treeObj){
-			/*$.ajax({
-				type:"POST",
-				url:"${dynamicURL}/authority/modelPart.action?resourceType=" + resourceType,
-				dataType : "json",
-				success:function(data){
-					// 如果返回数据不为空，加载"业务模块"目录
-					if(data != null){
-						// 将返回的数据赋给zTree
-						$.fn.zTree.init($("#"+treeObj), setting, data);
- 						alert(treeObj);
-						zTree = $.fn.zTree.getZTreeObj(treeObj);
-						if( zTree ){
-							// 默认展开所有节点
-							zTree.expandAll(true);
-						}
-					}
-				}
-			});*/
             data = [
             {"accessPath":"user_list.html","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":7,"resourceName":"User list","resourceOrder":0,"resourceType":""},
 			{"accessPath":"stuff_list.html","checked":false,"delFlag":0,"parentID":1,"resourceCode":"","resourceDesc":"","resourceGrade":3,"resourceID":7,"resourceName":"Stuff list","resourceOrder":0,"resourceType":""}
@@ -190,9 +108,37 @@
 	// 		$("#ajaxDialog").dialog("close");
 			$("#ajaxDialog").hide();
 		}
+		
+		function testadmin(){
+			var username = getCookie("username");
+			if(username != "admin"){	
+				alert("please log in as admin!");
+				//window.location.href = "index.html";
+			}
+		}
+		
+		function setCookie(cvalue,exdays)
+		{
+				var d = new Date();
+				d.setTime(d.getTime()+(exdays*24*60*60*1000));
+				var expires = "expires="+d.toGMTString();
+				document.cookie = "username=" + cvalue + "; " + expires;
+		}
+			
+		function getCookie(cname)
+		{
+			var name = cname + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0; i<ca.length; i++) 
+			{
+				var c = ca[i].trim();
+				if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+			}
+			return "";
+		}
 	</script>
 </head>
-<body onload="getDate01()">
+<body onload="testadmin()">
     <!-- side menu start -->
 	<div id="side">
 		 <div id="left_menu_cnt">
@@ -206,7 +152,7 @@
 	</div>
     <!-- side menu start -->
     <div id="main">
-      	<iframe name="right" id="rightMain" src="house_list.html" frameborder="no" scrolling="auto" width="100%" height="100%" allowtransparency="true"/>
+      	<iframe name="right" id="rightMain" frameborder="no" scrolling="auto" width="100%" height="100%" allowtransparency="true"/>
     </div>
 
 </body>

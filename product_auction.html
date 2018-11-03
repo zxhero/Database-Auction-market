@@ -120,6 +120,48 @@
 								<button id="bid_confirm" class="modal-action modal-close btn">BID</button>
 								</div>
 								</li>
+								<li id="edit_BID" class="modal">
+								<!--modal-->
+									<div class="modal-content">
+									<h4>Chang bid information</h4>
+									<form class="row input-field">
+									<input type="text" name="" id="changed_price" value=""/>
+									<label for="changed_price" data-lengh="120">price:</label>
+									</form>
+									<form class="row input-field">
+									<input type="text" name="" id="changed_start_time" value=""/>
+									<label for="changed_start_time" data-lengh="120">start time:</label>
+									</form>
+									<form class="row input-field">
+									<input type="text" name="" id="changed_end_time" value=""/>
+									<label for="changed_end_time" data-lengh="120">end time:</label>
+									</form>
+									<form class="row input-field">
+									<input type="text" name="" id="changed_description" value=""/>
+									<label for="changed_description" data-lengh="120">description:</label>
+									</form>
+									<form class="row input-field">
+									<input type="text" name="" id="changed_Pick_up_location" value=""/>
+									<label for="changed_Pick_up_location" data-lengh="120">Pick up location:</label>
+									</form>
+									<form class="row input-field">
+									<input type="text" name="" id="changed_Pick_up_time" value=""/>
+									<label for="changed_Pick_up_time" data-lengh="120">Pick up time:</label>
+									</form>
+									<form class="row input-field">
+									<input type="text" name="" id="changed_Return_location" value=""/>
+									<label for="changed_Return_location" data-lengh="120">Return location:</label>
+									</form>
+									<form class="row input-field">
+									<input type="text" name="" id="changed_Return_Time" value=""/>
+									<label for="changed_Return_Time" data-lengh="120">Return Time:</label>
+									</form>
+									</div>
+									<div class="divider"></div>
+									<div class="modal-footer">
+									<button id="confirm_change" class="modal-action modal-close btn">Confirm</button>
+									</div>
+								</li>
 							</ul>
 							<div class="clearfix"></div>
 						</div>
@@ -325,35 +367,6 @@
 			$('#help').modal('');
 			$('#textarea1').val('');
   			$('#textarea1').trigger('autoresize');
-			/*$(document).on('scroll',function(){
-				if ($(document).scrollTop() >= 50) {
-					$("#nav2").addClass('active')
-					$(".content").css('padding-top','120px')
-				} else{
-					$("#nav2").removeClass('active')
-					$(".content").css('padding-top','0px')
-				}
-				if ($(document).scrollTop() >= 1090) {
-					$("#Nav2").addClass('active')
-				} else{
-					$("#Nav2").removeClass('active')
-				}
-			})
-			//banner1
-			$('.carousel.carousel-slider').carousel({
-				indicators:false
-			});
-			$(".carousel.carousel-slider ul").on('click',function(){
-		      		var _index = $(this).index();
-		      		$("#tab-content .tab-content-n").eq(_index).show().siblings().hide()
-		      	})
-			//arrow
-			$('.pro-a .banner-arrows .left').on('click',function(){
-				$('.carousel').carousel('prev');
-			})
-			$('.pro-a .banner-arrows .right').on('click',function(){
-				$('.carousel').carousel('next');
-			})*/
 			//在可视区域内出现时执行动画
 			//
 			//
@@ -434,7 +447,7 @@
 				$('#go_top').toTop();
 			})
 			
-			var owner = document.getElementById("owner").innerHTML;
+			var owner = document.getElementById("owner").innerHTML.split(":")[1].trim();
 			var username = getCookie("username");
 			
 			if(username != ''){
@@ -444,20 +457,30 @@
 				$('#login_start').append(popContent);
 				//document.getElementById("mycount").innerHTML="";
 			}
-			
+			var current_time = new Date();
+			var end_time = convertDateFromString(document.getElementById("end_time").innerHTML);
+			var start_time = convertDateFromString(document.getElementById("start_time").innerHTML);
+			//var start_time = convertDateFromString("2018-11-12 12:23");
+			//var end_time = convertDateFromString("2018-11-12 12:23");
 			if(username == ""){
 				
 				let popContent =
 					'<li><a href="index.html" class="right btn" onclick="alert(&quot;Login!&quot;)" >Bid Now!</a></li>' ;
 				$('#Bid_start').prepend(popContent);
-			}else if(username != "" && username == owner){1
-				//document.getElementById("owner").innerHTML = "zxhero";
-				let popContent1 =
-					'<li><a class="right btn" id="Bid_then">Edit Bid</a></li>'
-				$('#Bid_start').append(popContent1);
-				let popContent2 = 
-					'<a id="delete_bid" class="left btn" href="javascript:history.go(-1)"> Delete! </a>';
-				$('#my_price_start').prepend(popContent2);
+			}else if(username != "" && username == owner){
+				if(start_time > current_time){
+					let popContent1 =
+						'<li><a class="right btn" id="Bid_then" href="#edit_BID">Edit Bid</a></li>'
+					$('#Bid_start').append(popContent1);
+					let popContent2 = 
+						'<a id="delete_bid" class="left btn" onclick="delete_bid()"> Delete! </a>';
+					$('#my_price_start').prepend(popContent2);
+				}
+				else{
+					let popContent =
+						'<li><a class="right btn" id="Bid_then" onclick="end_bid()">End Bid</a></li>'
+					$('#Bid_start').append(popContent);
+				}
 			}else{
 				let popContent1 =
 					'<li><a href="#BID" class="right btn" >Bid Now!</a></li>' ;
@@ -505,7 +528,38 @@
 				document.getElementById("my_price").innerHTML="My Price: "+bid_price.value;
 				document.getElementById("bid_status_price").innerHTML=bid_price.value;
 					//alert(bid_price.va);
-			});			
+			});	
+			$('#edit_BID').modal('');
+			$('#changed_price').trigger('autoresize');
+			$('#changed_start_time').trigger('autoresize');
+			$('#changed_end_time').trigger('autoresize');
+			$('#changed_Pick_up_time').trigger('autoresize');
+			$('#changed_Return_Time').trigger('autoresize');
+			$('#changed_Pick_up_location').trigger('autoresize');
+			$('#changed_Return_location').trigger('autoresize');
+			$('#changed_description').trigger('autoresize');
+			$(".content1 #confirm_change").click(function(){
+				var form = new FormData();
+				form.append("product_id",document.getElementById("production_num").innerHTML.split(":")[1]);
+				form.append("price", document.getElementById("changed_price").value);
+				form.append("start_time", document.getElementById("changed_start_time").value);
+				form.append("end_time", document.getElementById("changed_end_time").value);
+				form.append("description", document.getElementById("changed_description").value);
+				form.append("Pick_up_location", document.getElementById("changed_Pick_up_location").value);
+				form.append("Pick_up_time", document.getElementById("changed_Pick_up_time").value);
+				form.append("Return_location", document.getElementById("changed_Return_location").value);
+				form.append("Return_Time", document.getElementById("changed_Return_Time").value);
+				var xhttp = new XMLHttpRequest();
+				xhttp.open("POST", "change_bid.php", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				//alert(form);
+				xhttp.send(form);
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						window.location.href = "product_auction.php?productid=" + this.responseText;
+					}
+				};
+			})
 			function getCookie(cname)
 			{
 				var name = cname + "=";
@@ -517,47 +571,69 @@
 				}
 				return "";
 			}
+			function end_bid(){
+				clearInterval(stop_bid);
+				let xhttp = new XMLHttpRequest();
+				var transfer_data = {
+					ownerid: owner,
+					product_id: document.getElementById("production_num").innerHTML.split(":")[1],
+				}
+					
+				var transfer_json = "Bid_end=" + JSON.stringify(transfer_data);
+				xhttp.open("POST", "handle_bid.php", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send(transfer_json);
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						let response = this.responseText.parseJSON(); 
+						if(username == response.username){
+							alert("You win!");
+							window.location.href = "transaction_datail.php?id="+response.transaction_id.toString();
+						}
+						else{
+							alert("this bid end!")
+							window.location.href = "auction.php";
+						}	
+					}
+				};
+			}
 			
 			function check_time(){
 				var t=new Date();
-				var ts = document.getElementById("end_time").innerHTML;
-				var year = ts.split(" ")[0].split("-")[0];
-				var month = ts.split(" ")[0].split("-")[1];
-				var day = ts.split(" ")[0].split("-")[2];
-				var hour = ts.split(" ")[1].split(":")[0];
-				var minute = ts.split(" ")[1].split(":")[1];
-				//alert(typeof(t.getFullYear()));
-				//var end_time = document.getElementById("my_price").innerHTML;
-				if(t.getFullYear().toString() == year && (t.getMonth()+1).toString() == month && t.getDate().toString() == day
-				   && t.getHours().toString() == hour && t.getMinutes().toString() == minute){
-					//alert(t.getFullYear().toString());
-					clearInterval(stop_bid);
-					let xhttp = new XMLHttpRequest();
-					var transfer_data = {
-						ownerid: owner,
-						product_id: document.getElementById("production_num").innerHTML.split(":")[1],
-					}
-					
-					var transfer_json = "Bid_end=" + JSON.stringify(transfer_data);
-					xhttp.open("POST", "handle_bid.php", true);
-					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-					xhttp.send(transfer_json);
-					xhttp.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							let response = this.responseText.parseJSON(); 
-							if(username == response.username){
-								alert("You win!");
-								window.location.href = "transaction_datail.php?id="+response.transaction_id.toString();
-							}
-							else{
-								alert("this bid end!")
-								window.location.href = "auction.php";
-							}	
-						}
-					};
+				if(t >= end_time){
+					end_bid();
 				}else return;
 				
 			}
+			
+			function delete_bid(){
+				var pid = document.getElementById("production_num").innerHTML.split(":")[1];
+				let xhttp = new XMLHttpRequest();
+					
+				var transfer_json = "delete=" + pid;
+				xhttp.open("POST", "delete.php", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send(transfer_json);
+				//alert("delete succeed!");
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						alert("delete succeed!");
+						window.location.href = "auction.php";
+					}
+				};
+			}
+			
+			function convertDateFromString(dateString) 
+			{ 
+				if (dateString) { 
+					var arr1 = dateString.split(" "); 
+					var sdate = arr1[0].split("-"); 
+					var mdate = arr1[1].split(":")
+					var date = new Date(parseInt(sdate[0]), parseInt(sdate[1])-1, parseInt(sdate[2]),parseInt(mdate[0]),parseInt(mdate[1])); 
+					return date;
+				} 
+			}
+			
 		</script>
 	</body>
 </html>

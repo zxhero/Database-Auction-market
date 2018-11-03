@@ -232,11 +232,11 @@
 			$(function () {
 				$('#go_top').toTop();
 			})
-			
+			//setCookie("zxhero",24);
 			var username = getCookie("username");
 			if(username != ''){
 				let popContent =
-					'<li ><a href="profile.html" class="iconfont" id="mycount"> welcome mycount</a></li>' ;
+					'<li ><a href="profile.php?" class="iconfont" id="mycount"> welcome mycount</a></li>' ;
 				$('#login_start').append(popContent);
 				//document.getElementById("mycount").innerHTML="";
 			}else{
@@ -259,20 +259,25 @@
 				xhttp.send(transfer_json);
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("test").innerHTML = this.responseText;
+						//document.getElementById("test").innerHTML = this.responseText;
 						if(this.responseText == "fail"){
 							alert("please input correct username and password");
 							//window.location.href = "index.html?id=mycount";
 							return ;
 						}
-						setCookie(transfer_data.username.toGMTString(),24);
-						window.location.href = "index.html";
+						setCookie(transfer_data.username.toString(),24);
+						if(this.responseText == "admin"){
+							window.location.href = "admin.php";
+						}else
+							window.location.href = "index.html";
 					}
 				};
 					//window.location.href = "index.html?id=mycount";
 					//document.getElementById("mycount").innerHTML="mycount";
 			});
-			
+			//setCookie("zxhero",24);
+			//var test_cookie = getCookie("username");
+			//alert(test_cookie);
 			function onload_function(){
 				document.getElementById("mycount").innerHTML="mycount";
 			}

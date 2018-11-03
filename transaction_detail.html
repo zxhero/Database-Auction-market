@@ -58,78 +58,9 @@
 							<div id="tab-content" class="col l12 m12 s12">
 								<ul class="tab-content-n">
 									<li id="tab1"><img src="img/product1/1.png"></li>
-									<li id="tab2"><img src="img/product1/2.png"></li>
-									<li id="tab3"><img src="img/product1/3.png"></li>
-									<li id="tab4"><img src="img/product1/4.png"></li>
-								</ul>
-								<ul class="tab-content-n" style="display: none;">
-									<li id="tab5"><img src="img/product1/5.png"></li>
-									<li id="tab6"><img src="img/product1/6.png"></li>
-									<li id="tab7"><img src="img/product1/7.png"></li>
-									<li id="tab8"><img src="img/product1/8.png"></li>
-								</ul>
-								<ul class="tab-content-n" style="display: none;">
-									<li id="tab9"><img src="img/product1/9.png"></li>
-									<li id="tab10"><img src="img/product1/10.png"></li>
 								</ul>
 							</div>
-							<div class="carousel carousel-slider col l12 m12 s12">
-								<ul class="carousel-item tabs">
-									<li class="tab col s3"><a href="#tab1"><img src="img/product1/1.png"></a></li>
-									<li class="tab col s3"><a href="#tab2"><img src="img/product1/2.png"></a></li>
-									<li class="tab col s3"><a href="#tab3"><img src="img/product1/3.png"></a></li>
-									<li class="tab col s3"><a href="#tab4"><img src="img/product1/4.png"></a></li>
-									<div class="clearfix"></div>
-								</ul>
-								<ul class="carousel-item tabs">
-									<li class="tab col s3"><a href="#tab5"><img src="img/product1/5.png"></a></li>
-									<li class="tab col s3"><a href="#tab6"><img src="img/product1/6.png"></a></li>
-									<li class="tab col s3"><a href="#tab7"><img src="img/product1/7.png"></a></li>
-									<li class="tab col s3"><a href="#tab8"><img src="img/product1/8.png"></a></li>
-									<div class="clearfix"></div>
-								</ul>
-								<ul class="carousel-item tabs">
-									<li class="tab col s3"><a href="#tab9"><img src="img/product1/9.png"></a></li>
-									<li class="tab col s3"><a href="#tab10"><img src="img/product1/10.png"></a></li>
-									<div class="clearfix"></div>
-								</ul>
-							</div>
-							<div class="banner-arrows col l8 offset-l2 m8 offset-m2 s8 ">
-						      	<a class="left"> &lt; </a>
-						      	<a class="right"> &gt; </a>
-						      	<div class="clearfix"></div>
-						    </div>
-							<ul class="survive col l12 m12 s12">
-								<li class="col l3">
-									<p><span class="material-icons">replay_30</span> 30天退换货</p>
-								</li>
-								<li class="col l3">
-									<p><span class="material-icons">replay_30</span> 2年有限保修</p>
-								</li>
-								<li class="col l3">
-									<p><span class="material-icons">schedule</span> 24x7在线服务</p>
-								</li>
-								<li class="col l3">
-									<p><span class="material-icons">trending_up</span> 极速上手服务</p>
-								</li>
-								<div class="clearfix"></div>
-							</ul>
 							<div class="clearfix"></div>
-						</div>
-						<div class="pro-b hide-on-large-only">
-							<div class="carousel carousel-slider col m12 s12">
-								<a href="#!" class="carousel-item"><img src="img/product1/1.png"></a>
-								<a href="#!" class="carousel-item"><img src="img/product1/2.png"></a>
-								<a href="#!" class="carousel-item"><img src="img/product1/3.png"></a>
-								<a href="#!" class="carousel-item"><img src="img/product1/4.png"></a>
-								<a href="#!" class="carousel-item"><img src="img/product1/5.png"></a>
-								<a href="#!" class="carousel-item"><img src="img/product1/6.png"></a>
-								<a href="#!" class="carousel-item"><img src="img/product1/7.png"></a>
-								<a href="#!" class="carousel-item"><img src="img/product1/8.png"></a>
-								<a href="#!" class="carousel-item"><img src="img/product1/9.png"></a>
-								<a href="#!" class="carousel-item"><img src="img/product1/10.png"></a>
-								<div class="clearfix"></div>
-							</div>
 						</div>
 					</div>
 					<div class="product-intro col l6 m12 s12">
@@ -142,6 +73,7 @@
 						<div class="product-intro-txt">
 							<ul>
 								<li id="owner">Owner: <span id="owner">Zhang Xu</span></li>
+								<li id="transaction_id">transaction id: </li>
 								<li id="transaction_status">status: </li>								
 								<li id="description">simple description: </li>
 							</ul>
@@ -380,35 +312,7 @@
 			$('#help').modal('');
 			$('#textarea1').val('');
   			$('#textarea1').trigger('autoresize');
-			$(document).on('scroll',function(){
-				if ($(document).scrollTop() >= 50) {
-					$("#nav2").addClass('active')
-					$(".content").css('padding-top','120px')
-				} else{
-					$("#nav2").removeClass('active')
-					$(".content").css('padding-top','0px')
-				}
-				if ($(document).scrollTop() >= 1090) {
-					$("#Nav2").addClass('active')
-				} else{
-					$("#Nav2").removeClass('active')
-				}
-			})
-			//banner1
-			$('.carousel.carousel-slider').carousel({
-				indicators:false
-			});
-			$(".carousel.carousel-slider ul").on('click',function(){
-		      		var _index = $(this).index();
-		      		$("#tab-content .tab-content-n").eq(_index).show().siblings().hide()
-		      	})
-			//arrow
-			$('.pro-a .banner-arrows .left').on('click',function(){
-				$('.carousel').carousel('prev');
-			})
-			$('.pro-a .banner-arrows .right').on('click',function(){
-				$('.carousel').carousel('next');
-			})
+
 
 			//在可视区域内出现时执行动画
 			//
@@ -490,7 +394,7 @@
 				$('#go_top').toTop();
 			})
 			
-			var owner = document.getElementById("owner").innerHTML;
+			var owner = document.getElementById("owner").innerHTML.split(":")[1].trim();
 			var username = getCookie("username");
 			if(username != "" && username == owner){//owner
 				//document.getElementById("owner").innerHTML = "zxhero";
@@ -506,12 +410,8 @@
 			$('#RANKING').modal('');
 			$('#Rank_star').trigger('autoresize');
 			$(".content1 #return_confirm").click(function(){
-				//var Rank_star = document.getElementById("Bid_price");
-				//check bid price input
-				//var current_price = document.getElementById("bid_status_price").innerHTML;
-				//console.log(current_price);
-				//my_price
 				var form = new FormData();
+				form.append("transaction_id", document.getElementById("transaction_id").innerHTML.split(":")[1].trim());
 				form.append("Rank_star", document.getElementById("Rank_star").value);
 				if(username != "" && username == owner){
 					form.append("owner", "1");
@@ -519,20 +419,16 @@
 					form.append("owner", "0");
 				}
 				var xhttp = new XMLHttpRequest();
-				
-				//console.log(transfer_json);
-				//document.getElementById("mycount").innerHTML = transfer_json;
-				xhttp.open("POST", "handle_bid.php", true);
-				//xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.open("POST", "rank_transaction.php", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhttp.send(form);
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
-						//window.location.href = "index.html?id=mycount";
+						alert("rank succeed!");
+						window.location.href = "index.html";
 						//document.getElementById("test").innerHTML = this.responseText;
 					}
 				};
-				//document.getElementById("my_price").innerHTML="My Price: "+bid_price.value;
-				//alert(bid_price.va);
 			});
 			function getCookie(cname)
 			{

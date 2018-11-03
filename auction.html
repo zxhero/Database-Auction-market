@@ -7,6 +7,15 @@
 		<link rel="stylesheet" type="text/css" href="css/materialize.css"/>
 		<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
 		<link rel="stylesheet" type="text/css" href="css/store_style.css"/>
+		
+<script type="text/javascript" src="scripts/jquery/jquery-1.7.1.js"></script>
+<link href="style/authority/basic_layout.css" rel="stylesheet" type="text/css">
+<link href="style/authority/common_style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="scripts/authority/commonAll.js"></script>
+<script type="text/javascript" src="scripts/fancybox/jquery.fancybox-1.3.4.js"></script>
+<script type="text/javascript" src="scripts/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="style/authority/jquery.fancybox-1.3.4.css" media="screen"></link>
+<script type="text/javascript" src="scripts/artDialog/artDialog.js?skin=default"></script>
 	</head>
 	<body>
 		<div id="nav1" class="nav-wrapper">
@@ -303,54 +312,28 @@
 					</ul>
 					<div class="clearfix"></div>
 				</div>
-				<div class="content5">
-					<h4>微软商城，四大承诺</h4>
-					<ul>
-						<li class="col l3 m6 s12">
-							<div class="card">
-							    <div class="card-image hide-on-med-and-down" >
-							        <a href=""><img src="img/store/promise_1.jpg"/></a>
-							    </div>
-						        <div class="card-content">
-							        <p><span class="material-icons">replay_30</span> 30天退换货</p>
-						        </div>
-						    </div>
-						</li>
-						<li class="col l3 m6 s12">
-							<div class="card">
-							    <div class="card-image hide-on-med-and-down">
-							        <a href=""><img src="img/store/promise_2.jpg"/></a>
-							    </div>
-						        <div class="card-content">
-							        <p><span class="material-icons">replay_30</span> 2年有限保修</p>
-						        </div>
-						    </div>
-						</li>
-						<li class="col l3 m6 s12">
-							<div class="card">
-							    <div class="card-image hide-on-med-and-down">
-							        <a href=""><img src="img/store/promise_3.jpg"/></a>
-							    </div>
-						        <div class="card-content">
-							        <p><span class="material-icons">schedule</span> 24x7在线服务</p>
-						        </div>
-						    </div>
-						</li>
-						<li class="col l3 m6 s12">
-							<div class="card">
-							    <div class="card-image hide-on-med-and-down">
-							        <a href=""><img src="img/store/promise_4.jpg"/></a>
-							    </div>
-						        <div class="card-content">
-							        <p><span class="material-icons">trending_up</span> 极速上手服务</p>
-						        </div>
-						    </div>
-						</li>
-						<div class="clearfix"></div>
-					</ul>
-					<div class="hide-on-med-and-down" style="text-align: center;">
-						<p><span class="material-icons">call</span> 微软官方商城服务热线：4008822059&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="material-icons">call</span> 微软中国技术支持热线：4008203800 </p>  
-						<p><span class="material-icons">call</span> 微软官方商城企业服务热线：4008056783&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="material-icons">help</span> 想了解更多，请点击 <a href="">这里</a></p>
+				<br> </br>
+				<div align="right">
+					<div class="ui_flt" style="height: 30px; line-height: 30px;">
+						共有
+						<span class="ui_txt_bold04">90</span>
+						条记录，当前第
+						<span class="ui_txt_bold04">1
+						/
+						9</span>
+						页
+					</div>
+					<div class="">
+						<!--    如果是第一页，则只显示下一页、尾页 -->
+							<input type="button" value="首页" class="ui_input_btn01" />
+							<input type="button" value="上一页" class="ui_input_btn01" />
+							<input type="button" value="下一页" class="ui_input_btn01"
+								onclick="jumpNormalPage(2);" />
+							<input type="button" value="尾页" class="ui_input_btn01"
+								onclick="jumpNormalPage(9);" />
+						<!--     如果是最后一页，则只显示首页、上一页 -->
+						转到第<input type="text" id="jumpNumTxt" style="width:40px; height:20px;" />页
+							 <input type="button" class="ui_input_btn01" value="跳转" onclick="jumpInputPage(9);" />
 					</div>
 				</div>
 			</div>
@@ -573,7 +556,7 @@
 			}
 			
 			$("#upload_confirm").click(function(){
-				if(username != '' || username == null){
+				if(username == '' || username == null){
 					alert("you need log in");
 					window.location.href = "index.html";
 				}
@@ -600,11 +583,11 @@
 				//document.getElementById("mycount").innerHTML = transfer_json;
 				xhttp.open("POST", "handle_bid.php", true);
 				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				alert("111");
+				//alert("111");
 				xhttp.send(form);
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
-						window.location.href = "auction.html";
+						window.location.href = "product_auction.php?productid=" + this.responseText;
 						//document.getElementById("test").innerHTML = this.responseText;
 					}
 				};

@@ -396,11 +396,14 @@
 			
 			var owner = document.getElementById("owner").innerHTML.split(":")[1].trim();
 			var username = getCookie("username");
+			var transaction_status = document.getElementById("transaction_status").innerHTML.split(":")[1].trim();
 			if(username != "" && username == owner){//owner
 				//document.getElementById("owner").innerHTML = "zxhero";
-				let popContent =
-					'<li><a href="#RANKING" class="right btn" >Confirm return</a></li>'
-				$('#Return_start').append(popContent);
+				if(transaction_status != "succeed" && transaction_status != "failed"){
+					let popContent =
+						'<li><a href="#RANKING" class="right btn" >Confirm return</a></li>'
+					$('#Return_start').append(popContent);
+				}
 			}else{//not owner
 				let popContent =
 					'<li><a href="#RANKING" class="right btn" >Return item</a></li>' ;
@@ -410,9 +413,15 @@
 			$('#RANKING').modal('');
 			$('#Rank_star').trigger('autoresize');
 			$(".content1 #return_confirm").click(function(){
+				let rank_value = parseInt(document.getElementById("Rank_star").innerHTML);
+				//alert(rank_value);
+				if(rank_value < 0 || rank_value > 5 || isNaN(rank_value)){
+					alert("please input 1-5");
+					return;
+				}
 				var form = new FormData();
 				form.append("transaction_id", document.getElementById("transaction_id").innerHTML.split(":")[1].trim());
-				form.append("Rank_star", document.getElementById("Rank_star").value);
+				form.append("Rank_star", rank_value);
 				if(username != "" && username == owner){
 					form.append("owner", "1");
 				}else{
@@ -424,8 +433,14 @@
 				xhttp.send(form);
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
-						alert("rank succeed!");
-						window.location.href = "index.html";
+						if(this.responseText != "success"){
+							alert("Your operation is unsuccessful");
+							window.history.go(0);
+						}else{
+							alert("rank succeed!");
+							window.location.href = "index.html";
+						}
+						
 						//document.getElementById("test").innerHTML = this.responseText;
 					}
 				};

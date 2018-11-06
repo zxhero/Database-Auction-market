@@ -19,12 +19,12 @@
 			let user_id = event.parentNode.parentNode.childNodes[1].innerHTML.trim();
 			let xhttp = new XMLHttpRequest();			
 			var transfer_json = "user_id=" + user_id;
-			xhttp.open("POST", "delete_user.php", true);
+			xhttp.open("POST", "admin_delete.php", true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhttp.send(transfer_json);
 			xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					window.location.href = "admin.php";
+					window.history.go(0);
 				}
 			};			
 		}
@@ -40,32 +40,41 @@
 		xhttp.send(transfer_json);
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				window.location.href = "admin.php";
+				window.history.go(0);
 			}
 		};
 	}
 
 	/** 普通跳转 **/
-	function jumpNormalPage(page){
-		$("#submitForm").attr("action", "house_list.html?page=" + page).submit();
+	function jumpNormalPage(page_code){
+		alert(page_code);
+		if(page_code == 1){
+			window.location.href = "user_list.php?page=1";
+		}else if(page_code == 2){
+			window.location.href = "user_list.php?page="+(parseInt(document.getElementById('current_page').innerHTML)-1).toString();
+		}else if(page_code == 3){
+			window.location.href = "user_list.php?page=1"+(parseInt(document.getElementById('current_page').innerHTML)+1).toString();
+		}else{
+			window.location.href = "user_list.php?page="+document.getElementById('total_pages').innerHTML;
+		}
+		
 	}
 	
 	/** 输入页跳转 **/
 	function jumpInputPage(){
 		// 如果“跳转页数”不为空
-		let totalPage = document.getElementById("total_pages").innerHTML.parseInt();
+		let totalPage = parseInt(document.getElementById("total_pages").innerHTML);
 		if($("#jumpNumTxt").val() != ''){
 			var pageNum = parseInt($("#jumpNumTxt").val());
 			// 如果跳转页数在不合理范围内，则置为1
 			if(pageNum<1 | pageNum>totalPage){
-				art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'请输入合适的页数，\n自动为您跳到首页', ok:true,});
-				pageNum = 1;
+				art.dialog({icon:'error', title:'Remind', drag:false, resize:false, content:'Please input proper page number.\n', ok:true,});
+				return;
 			}
-			$("#submitForm").attr("action", "house_list.html?page=" + pageNum).submit();
+			window.location.href = "user_list.php?page="+pageNum.toString();
 		}else{
 			// “跳转页数”为空
-			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'请输入合适的页数，\n自动为您跳到首页', ok:true,});
-			$("#submitForm").attr("action", "house_list.html?page=" + 1).submit();
+			art.dialog({icon:'error', title:'Remind', drag:false, resize:false, content:'Please input proper page number.\n', ok:true,});
 		}
 	}
 </script>
@@ -110,17 +119,19 @@
 	</form>
 	<div>
 		<div class="ui_flt" style="height: 30px; line-height: 30px;">
-			total<span class="ui_txt_bold04" id="total_pages">90</span>pages, 
-			current page<span class="ui_txt_bold04" id="current_page">19</span>.
+			total <span class="ui_txt_bold04" id="total_pages">90</span> pages, 
+			current page <span class="ui_txt_bold04" id="current_page">19</span>.
 		</div>
 		<div class="ui_frt">				
-			<input type="button" value="first page" class="ui_input_btn01" />
-			<input type="button" value="last page" class="ui_input_btn01" />
-			<input type="button" value="next page" class="ui_input_btn01"
-				onclick="jumpNormalPage(2);" />
-			<input type="button" value="end page" class="ui_input_btn01"
-				onclick="jumpNormalPage(9);" />						
-			turn to<input type="text" id="jumpNumTxt" class="ui_input_txt01" />page
+			<input type="button" value="First page" class="ui_input_btn01" 
+				onclick="jumpNormalPage(1);"/>
+			<input type="button" value="Previous page" class="ui_input_btn01" 
+				onclick="jumpNormalPage(2);"/>
+			<input type="button" value="Next page" class="ui_input_btn01"
+				onclick="jumpNormalPage(3);" />
+			<input type="button" value="Last page" class="ui_input_btn01"
+				onclick="jumpNormalPage(4);" />						
+			turn to <input type="text" id="jumpNumTxt" class="ui_input_txt01" /> page
 			<input type="button" class="ui_input_btn01" value="Jump" onclick="jumpInputPage();" />
 		</div>
 	</div>

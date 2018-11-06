@@ -491,10 +491,10 @@
 			}
 			
 			var  stop_bid = setInterval("check_time()",1000);
-			
+			//alert(document.getElementById("bid_status_people").childNodes[1].innerHTML);
 			$('#BID').modal('');
 			$('#Bid_price').trigger('autoresize');
-			$(".content1 #bid_confirm").click(function(){
+			$(".content1 #bid_confirm").click(function(){ 
 				var bid_price = document.getElementById("Bid_price");
 				//check bid price input
 				var current_price = document.getElementById("bid_status_price").innerHTML;
@@ -521,12 +521,15 @@
 				xhttp.send(transfer_json);
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
+						window.history.go(0);
 						//window.location.href = "index.html?id=mycount";
 						//document.getElementById("test").innerHTML = this.responseText;
 					}
 				};
-				document.getElementById("my_price").innerHTML="My Price: "+bid_price.value;
-				document.getElementById("bid_status_price").innerHTML=bid_price.value;
+				//document.getElementById("my_price").innerHTML="My Price: "+bid_price.value;
+				//document.getElementById("bid_status_price").innerHTML=bid_price.value;
+				//let bid_people = parseInt(document.getElementById("bid_status_people").childNodes[1].innerHTML);
+				//document.getElementById("bid_status_people").childNodes[1].innerHTML=(bid_people+1).toString();
 					//alert(bid_price.va);
 			});	
 			$('#edit_BID').modal('');
